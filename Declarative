@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_ENV = 'staging'
+    }
+
+    stages {
+
+        stage('Build') {
+            options {
+                retry(3)
+            }
+
+            steps {
+                sh 'make build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                catchError(buildResult: 'UNSTABLE') {
+                    sh 'make test'
+                }
+            }
+        }
+    }
+}

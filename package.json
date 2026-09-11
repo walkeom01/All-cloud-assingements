@@ -1,4 +1,10 @@
-npm install
-npm run build
-npm test
-npm run lint
+{
+  "name": "jenkins-q3-demo",
+  "version": "1.0.0",
+  "description": "Jenkins Q3 pipeline demo",
+  "scripts": {
+    "build": "echo Building application",
+    "test": "node test.js",
+    "lint": "echo Linting application"
+  }
+}

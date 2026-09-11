@@ -5,21 +5,19 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out code...'
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                sh 'echo Building'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'echo "Test report generated" > test-report.txt'
+                sh 'echo Running tests'
             }
         }
 
@@ -28,23 +26,23 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo 'Deploying application...'
+                sh 'echo Deploying'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'test-report.txt',
-                             allowEmptyArchive: true
+            archiveArtifacts artifacts: 'test-results/*.xml',
+                              allowEmptyArchive: true
         }
 
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Pipeline completed successfully'
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo 'Pipeline failed'
         }
     }
 }

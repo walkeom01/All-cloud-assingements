@@ -1,10 +1,16 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
+
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/walkeom01/cloud_assingment_02.git'
+                git url: 'https://github.com/walkeom01/cloud_assingment_02.git',
+                    branch: 'main'
             }
         }
 
@@ -17,6 +23,7 @@ pipeline {
 
         stage('Parallel Tests') {
             parallel {
+
                 stage('Unit Tests') {
                     steps {
                         sh 'npm test'
@@ -34,7 +41,7 @@ pipeline {
 
     post {
         always {
-            sh 'rm -rf *'
+            deleteDir()
         }
     }
 }

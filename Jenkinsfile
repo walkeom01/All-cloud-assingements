@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/cloud_assingment_02.git'
+                git url: 'https://github.com/walkeom01/cloud_assingment_02.git'
             }
         }
 
